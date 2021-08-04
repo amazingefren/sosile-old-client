@@ -1,21 +1,18 @@
-import React from "react";
-// import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { Link } from "react-router-dom";
 import { assign } from "../state/user";
 
 const Home = () => {
-  const user = useSelector((state: RootStateOrAny) => state.auth.user);
+  const user = useSelector((state: RootStateOrAny) => state.user);
   const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(assign({ userId: "hi", username: "hi", password: "hi" }));
+  })
   return (
     <div>
-      SOSILE APP
-      <br/>
-      <button
-        onClick={() => {
-          dispatch(assign({ userId: "hi", username: "hi", password: "hi" }));
-          console.log(user)
-        }}
-      >Hello: {user.userId}</button>
+      <Link to ="/login">Login</Link>
+      {user.username}
     </div>
   );
 };
