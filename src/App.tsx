@@ -1,20 +1,16 @@
 import React from "react";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { assign } from "./state/user";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Home, Login } from "./pages";
 
 const App = () => {
-  const user = useSelector((state: RootStateOrAny) => state.auth.user);
-  const dispatch = useDispatch();
   return (
-    <div>
-      SOSILE APP
-      <div
-        onClick={() => {
-          dispatch(assign({ userId: "hi", username: "hi" }));
-          console.log(user)
-        }}
-      > test state {user.userId}</div>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route path="*"><h1>ERROR</h1></Route>
+      </Switch>
+    </Router>
   );
 };
 
