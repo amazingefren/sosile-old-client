@@ -34,6 +34,7 @@ module.exports = {
     port: 4000,
     publicPath: "http://localhost:4000/dist/",
     hotOnly: true,
+    historyApiFallback: true
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devtool: "eval-source-map",
