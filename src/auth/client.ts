@@ -1,10 +1,8 @@
-// import { createClient } from '@urql/core'
+import { cacheExchange, createClient, dedupExchange, fetchExchange, } from '@urql/core'
 
 // TODO: Cookie based authentication
-/* const client = createClient({
-  url: 'https://localhost:3000/graphql',
-  fetchOptions: ()=>{
-    const token = localStorage.getItem('token')
-    return { headers: { authorization: token ? token : '' }}
-  }
-}) */
+export default createClient({
+  url: 'http://localhost:3000/graphql',
+  exchanges: [dedupExchange, cacheExchange, fetchExchange],
+  fetchOptions: {credentials: 'include'}
+})

@@ -11,12 +11,12 @@ interface UserUniqueInput {
   username?: string;
 }
 
-interface UserAuthInput {
+interface LoginInput {
   username: string;
   password: string;
 }
 
-interface CreateUserInput {
+interface RegisterInput {
   username: string;
   email: string;
   password: string;

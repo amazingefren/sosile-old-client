@@ -1,5 +1,7 @@
+import { LOGIN_MUTATION } from "../../api/user.service";
 import React, { FormEvent, useState } from "react";
 import { Redirect } from "react-router-dom";
+import { useMutation } from 'urql'
 // import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
@@ -11,12 +13,20 @@ const LoginForm = () => {
 
   const [freeze, setFreeze] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  
+  const [_loginResult, login] = useMutation(LOGIN_MUTATION)
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
     if (!freeze) {
       console.log(payload);
       setFreeze(true);
+
+      login({input: payload}).then(result => {
+        console.log(result)
+      })
+      
       setTimeout(() => {
         // fake async needs timeout
         setPayload({ username: "", password: "" });
@@ -35,8 +45,9 @@ const LoginForm = () => {
             type="text"
             value={payload.username}
             disabled={freeze}
-            onChange={(e) =>
-              setPayload({ ...payload, username: e.target.value })
+            onChange={(event) =>
+              // Regex Verify
+              setPayload({ ...payload, username: event.target.value })
             }
           />
         </label>
@@ -48,6 +59,7 @@ const LoginForm = () => {
             value={payload.password}
             disabled={freeze}
             onChange={(e) =>
+              // Regex Verify
               setPayload({ ...payload, password: e.target.value })
             }
           />
