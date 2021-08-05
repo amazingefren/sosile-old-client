@@ -1,4 +1,5 @@
-const TOKEN_KEY = 'token';
+// Cookies will be used instead
+/* const TOKEN_KEY = 'token';
 const REFRESH_TOKEN_KEY = "refresh_token"
 
 export const saveAuthData = ({token, refresh_token}: any) => {
@@ -16,4 +17,4 @@ export const getRefreshToken = () => {
 
 export const clearStorage = () => {
   localStorage.clear()
-}
+} */
