@@ -72,7 +72,7 @@ const LoginForm = () => {
           <input type="submit" value="Login" />
         </label>
       </form>
-      {redirect && <Redirect to="/" />}
+      {redirect && <Redirect to="/home" />}
     </div>
   );
 };

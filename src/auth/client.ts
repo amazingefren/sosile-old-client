@@ -1,8 +1,14 @@
-import { cacheExchange, createClient, dedupExchange, fetchExchange, } from '@urql/core'
+import {
+  cacheExchange,
+  createClient,
+  dedupExchange,
+  fetchExchange,
+} from "@urql/core";
 
-// TODO: Cookie based authentication
-export default createClient({
-  url: 'http://localhost:3000/graphql',
+const client = createClient({
+  url: "http://localhost:3000/graphql",
   exchanges: [dedupExchange, cacheExchange, fetchExchange],
-  fetchOptions: {credentials: 'include'}
-})
+  fetchOptions: { credentials: "include" },
+});
+
+export default client;
