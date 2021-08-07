@@ -1,7 +1,7 @@
 import { LOGIN_MUTATION } from "../../api/user.service";
 import React, { FormEvent, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { useMutation } from 'urql'
+import { useMutation } from "urql";
 // import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
@@ -13,8 +13,8 @@ const LoginForm = () => {
 
   const [freeze, setFreeze] = useState(false);
   const [redirect, setRedirect] = useState(false);
-  
-  const [_loginResult, login] = useMutation(LOGIN_MUTATION)
+
+  const [_loginResult, login] = useMutation(LOGIN_MUTATION);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -22,17 +22,22 @@ const LoginForm = () => {
     if (!freeze) {
       console.log(payload);
       setFreeze(true);
+      await login({ input: payload }).then((result) => {
+        console.log(result);
+        if (result.data.login){
+          return setRedirect(true)
+        } else {
+          setFreeze(false) 
+          return setPayload({password: "", username: payload.username})
+        }
+      });
 
-      login({input: payload}).then(result => {
-        console.log(result)
-      })
-      
-      setTimeout(() => {
-        // fake async needs timeout
-        setPayload({ username: "", password: "" });
-        setFreeze(false);
-        setRedirect(true);
-      }, 1000);
+      // setTimeout(() => {
+      //   // fake async needs timeout
+      //   setPayload({ username: "", password: "" });
+      //   setFreeze(false);
+      //   setRedirect(true);
+      // }, 1000);
     }
   };
 

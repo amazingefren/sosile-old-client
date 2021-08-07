@@ -3,7 +3,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Provider as Api } from "urql";
-
 import App from "./App";
 import { store } from "./redux/store";
 
